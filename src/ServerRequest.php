@@ -54,9 +54,10 @@ final class ServerRequest extends Request implements ServerRequestInterface
         HTTPVerb|string $method = HTTPVerb::GET,
         StreamInterface|\SplFileObject|string|null $body = new Stream(null),
         Headers $headers = new Headers(),
+        string $protocol = "",
         array $serverParams = []
     ) {
-        parent::__construct($resource, $method, $body, $headers);
+        parent::__construct($resource, $method, $body, $headers, $protocol);
 
         $this->serverParams = $serverParams;
 

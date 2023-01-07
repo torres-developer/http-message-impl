@@ -24,7 +24,7 @@
  * @license https://opensource.org/licenses/AGPL-3.0 GNU Affero General Public License version 3
  *
  * @since 1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace TorresDeveloper\HTTPMessage;
@@ -47,7 +47,8 @@ class Request implements RequestInterface
         UriInterface|string $resource = new URI("/"),
         HTTPVerb|string $method = HTTPVerb::GET,
         StreamInterface|\SplFileObject|string|null $body = new Stream(null),
-        Headers $headers = new Headers()
+        Headers $headers = new Headers(),
+        string $protocol = ""
     ) {
         if (is_string($resource)) {
             $resource = new URI($resource);
@@ -76,7 +77,7 @@ class Request implements RequestInterface
             $headers->Host = $host;
         }
 
-        $this->protocol = $_SERVER["SERVER_PROTOCOL"];
+        $this->protocol = $protocol;
     }
 
     public function getRequestTarget(): string
