@@ -45,7 +45,7 @@ final class Stream implements StreamInterface
 
             $this->write($text);
         } else {
-            $this->body = $body;
+            $this->body = $body ?: null;
         }
     }
 
