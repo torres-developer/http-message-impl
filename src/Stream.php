@@ -37,7 +37,7 @@ final class Stream implements StreamInterface
 
     public function __construct(\SplFileObject|string|null $body)
     {
-        if (is_string($body)) {
+        if (is_string($body) && $body) {
             $text = $body;
 
             $this->body = new \SplTempFileObject();
