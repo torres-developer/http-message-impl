@@ -127,7 +127,10 @@ final class Response implements ResponseInterface
 
     public function withStatus($code, $reasonPhrase = null): static
     {
-        if (!is_int($code) || !is_string($reasonPhrase)) {
+        if (
+            !is_int($code)
+            || (!is_string($reasonPhrase) && $reasonPhrase !== null)
+        ) {
             throw new \InvalidArgumentException();
         }
 
