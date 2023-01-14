@@ -40,7 +40,7 @@ final class Headers
 
     public function __set(string $name, mixed $value): void
     {
-        $name = mb_strtoupper($name);
+        $name = $this->keyGen($name);
 
         if ($this->__isset($name)) {
             array_push($this->headers[$name], $value);
@@ -51,21 +51,21 @@ final class Headers
 
     public function __get(string $name): mixed
     {
-        $name = mb_strtoupper($name);
+        $name = $this->keyGen($name);
 
         return $this->headers[$name] ?? null;
     }
 
     public function __isset(string $name): bool
     {
-        $name = mb_strtoupper($name);
+        $name = $this->keyGen($name);
 
         return isset($this->headers[$name]);
     }
 
     public function __unset(string $name): void
     {
-        $name = mb_strtoupper($name);
+        $name = $this->keyGen($name);
 
         unset($this->headers[$name]);
     }
@@ -73,5 +73,9 @@ final class Headers
     public function toArray(): array
     {
         return $this->headers;
+    }
+
+    private function keyGen(string $key): string {
+        return ucfirst(mb_strtolower($key));
     }
 }
