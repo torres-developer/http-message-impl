@@ -47,7 +47,7 @@ class Request implements RequestInterface
         UriInterface|string $resource = new URI("/"),
         HTTPVerb|string $method = HTTPVerb::GET,
         StreamInterface|\SplFileObject|string|null $body = new Stream(null),
-        Headers $headers = new Headers(),
+        Headers|iterable $headers = new Headers(),
         string $protocol = ""
     ) {
         if (is_string($resource)) {
@@ -67,6 +67,10 @@ class Request implements RequestInterface
         }
 
         $this->body = $body;
+
+        if (!($headers instanceof Headers)) {
+            $headers = new Headers($headers);
+        }
 
         $this->headers = $headers;
 

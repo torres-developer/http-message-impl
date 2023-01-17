@@ -53,7 +53,7 @@ final class ServerRequest extends Request implements ServerRequestInterface
         UriInterface|string $resource = new URI("/", false),
         HTTPVerb|string $method = HTTPVerb::GET,
         StreamInterface|\SplFileObject|string|null $body = new Stream(null),
-        Headers $headers = new Headers(),
+        Headers|iterable $headers = new Headers(),
         string $protocol = "",
         array $serverParams = []
     ) {

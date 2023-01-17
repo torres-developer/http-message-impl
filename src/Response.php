@@ -106,7 +106,7 @@ final class Response implements ResponseInterface
         int $status,
         string $reasonPhrase = null,
         StreamInterface|\SplFileObject|string|null $body = new Stream(null),
-        Headers $headers = new Headers()
+        Headers|iterable $headers = new Headers()
     ) {
         $this->status = $this->filterStatus($status);
         $this->statusText = $reasonPhrase ?? Response::STATUS[$status] ?? "";
@@ -116,6 +116,10 @@ final class Response implements ResponseInterface
         }
 
         $this->body = $body;
+
+        if (!($headers instanceof Headers)) {
+            $headers = new Headers($headers);
+        }
 
         $this->headers = $headers;
     }
