@@ -33,9 +33,13 @@ final class Headers
 {
     private array $headers;
 
-    public function __construct()
+    public function __construct(iterable $headers = [])
     {
         $this->headers = [];
+
+        foreach ($headers as $k => $v) {
+            $this->__set($k, $v);
+        }
     }
 
     public function __set(string $name, mixed $value): void
