@@ -1,7 +1,7 @@
 <?php
 
 /**
- *        http-message-impl - An implementation of the psr-7
+ *        http-message-impl - An implementation of the psr-7, psr-17
  *        Copyright (C) 2023  João Torres
  *
  *        This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@
  * @license https://opensource.org/licenses/AGPL-3.0 GNU Affero General Public License version 3
  *
  * @since 1.0.0
- * @version 1.1.0
+ * @version 1.0.0
  */
 
 namespace TorresDeveloper\HTTPMessage;
@@ -74,11 +74,11 @@ class Request implements RequestInterface
 
         $this->headers = $headers;
 
-        if (!isset($headers->Host)) {
+        if (!isset($headers["Host"])) {
             $host = $resource->getHost()
                 . ((($port = $resource->getPort()) === null) ? "" : ":$port");
 
-            $headers->Host = $host;
+            $headers["Host"] = $host;
         }
 
         $this->protocol = $protocol;
@@ -145,11 +145,11 @@ class Request implements RequestInterface
 
         $host = $uri->getHost();
 
-        if ($host && (!$preserveHost || !isset($req->headers->Host))) {
+        if ($host && (!$preserveHost || !isset($req->headers["Host"]))) {
             $host .= ((($port = $uri->getPort()) === null) ? "" : ":$port");
 
-            unset($req->headers->Host);
-            $req->headers->Host = $host;
+            unset($req->headers["Host"]);
+            $req->headers["Host"] = $host;
         }
 
         $req->resource = $uri;

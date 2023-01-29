@@ -1,7 +1,7 @@
 <?php
 
 /**
- *        http-message-impl - An implementation of the psr-7
+ *        http-message-impl - An implementation of the psr-7, psr-17
  *        Copyright (C) 2023  João Torres
  *
  *        This program is free software: you can redistribute it and/or modify

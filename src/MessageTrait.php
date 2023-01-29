@@ -1,7 +1,7 @@
 <?php
 
 /**
- *        http-message-impl - An implementation of the psr-7
+ *        http-message-impl - An implementation of the psr-7, psr-17
  *        Copyright (C) 2023  João Torres
  *
  *        This program is free software: you can redistribute it and/or modify
@@ -78,7 +78,7 @@ trait MessageTrait
             throw new \InvalidArgumentException();
         }
 
-        return isset($this->headers->$name);
+        return isset($this->headers[$name]);
     }
 
     public function getHeader($name): array
@@ -87,7 +87,7 @@ trait MessageTrait
             throw new \InvalidArgumentException();
         }
 
-        return $this->headers->$name;
+        return $this->headers[$name];
     }
 
     public function getHeaderLine($name): string
@@ -96,7 +96,7 @@ trait MessageTrait
             throw new \InvalidArgumentException();
         }
 
-        return "$name: " . implode($this->headers->$name);
+        return "$name: " . implode($this->headers[$name]);
     }
 
     public function withHeader($name, $value): static
@@ -115,10 +115,10 @@ trait MessageTrait
 
         $req = clone $this;
 
-        unset($req->headers->$name);
+        unset($req->headers[$name]);
 
         foreach ($value as $i) {
-            $req->headers->$name = (string) $i;
+            $req->headers[$name] = (string) $i;
         }
 
         return $req;
@@ -141,7 +141,7 @@ trait MessageTrait
         $req = clone $this;
 
         foreach ($value as $i) {
-            $req->headers->$name = (string) $i;
+            $req->headers[$name] = (string) $i;
         }
 
         return $req;
@@ -156,7 +156,7 @@ trait MessageTrait
 
         $req = clone $this;
 
-        unset($req->headers->$name);
+        unset($req->headers[$name]);
 
         return $req;
     }

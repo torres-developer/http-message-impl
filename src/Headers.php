@@ -1,7 +1,7 @@
 <?php
 
 /**
- *        http-message-impl - An implementation of the psr-7
+ *        http-message-impl - An implementation of the psr-7, psr-17
  *        Copyright (C) 2023  João Torres
  *
  *        This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@
 
 namespace TorresDeveloper\HTTPMessage;
 
-final class Headers
+final class Headers implements \ArrayAccess
 {
     private array $headers;
 
@@ -40,6 +40,16 @@ final class Headers
         foreach ($headers as $k => $v) {
             $this->__set($k, $v);
         }
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        if (!is_string($offset)) {
+            throw new \InvalidArgumentException("\$offset must be of type "
+                . "string");
+        }
+
+        $this->__set($offset, $value);
     }
 
     public function __set(string $name, mixed $value): void
@@ -53,6 +63,11 @@ final class Headers
         }
     }
 
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->__get($offset);
+    }
+
     public function __get(string $name): mixed
     {
         $name = $this->keyGen($name);
@@ -60,11 +75,26 @@ final class Headers
         return $this->headers[$name] ?? null;
     }
 
+    public function offsetExists(mixed $offset): bool
+    {
+        return $this->__isset($offset);
+    }
+
     public function __isset(string $name): bool
     {
         $name = $this->keyGen($name);
 
         return isset($this->headers[$name]);
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        if (!is_string($offset)) {
+            throw new \InvalidArgumentException("\$offset must be of type "
+                . "string");
+        }
+
+        $this->__unset($offset);
     }
 
     public function __unset(string $name): void
@@ -79,7 +109,8 @@ final class Headers
         return $this->headers;
     }
 
-    private function keyGen(string $key): string {
+    private function keyGen(string $key): string
+    {
         return ucfirst(mb_strtolower($key));
     }
 }
