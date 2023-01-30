@@ -33,11 +33,11 @@ use Psr\Http\Message\StreamInterface;
 
 trait MessageTrait
 {
-    private StreamInterface $body;
+    protected StreamInterface $body;
 
-    private Headers $headers;
+    protected Headers $headers;
 
-    private string $protocol;
+    protected string $protocol;
 
     public function getProtocolVersion(): string
     {

@@ -99,8 +99,8 @@ final class Response implements ResponseInterface
         511 => "Network Authentication Required"
     ];
 
-    private int $status;
-    private string $statusText;
+    protected int $status;
+    protected string $statusText;
 
     public function __construct(
         int $status,

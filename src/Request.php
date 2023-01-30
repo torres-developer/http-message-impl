@@ -37,11 +37,11 @@ class Request implements RequestInterface
 {
     use MessageTrait;
 
-    private UriInterface $resource;
+    protected UriInterface $resource;
 
-    private HTTPVerb $method;
+    protected HTTPVerb $method;
 
-    private string $requestTarget;
+    protected string $requestTarget;
 
     public function __construct(
         UriInterface|string $resource = new URI("/"),

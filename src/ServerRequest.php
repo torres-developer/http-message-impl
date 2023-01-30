@@ -200,10 +200,10 @@ final class ServerRequest extends Request implements ServerRequestInterface
 
         $this->parameters = array_values($path);
 
-        $controller ??= HOMEPAGE;
+        $controller ??= "";
         $controller = explode("-", $controller);
         $controller = array_map(ucfirst(...), $controller);
-        $this->controller = implode("", $controller) . "Controller";
+        $this->controller = implode("", $controller);
 
         $this->action = $action ?? "index";
     }
