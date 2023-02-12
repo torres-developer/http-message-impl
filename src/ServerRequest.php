@@ -87,7 +87,7 @@ final class ServerRequest extends Request implements ServerRequestInterface
     public function withCookieParams(array $cookies): static
     {
         $req = clone $this;
-        $req->cookieParams = [];
+        $req->cookieParams = $cookies;
 
         return $req;
     }
@@ -105,7 +105,7 @@ final class ServerRequest extends Request implements ServerRequestInterface
     public function withQueryParams(array $query): static
     {
         $req = clone $this;
-        $req->queryParams = [];
+        $req->queryParams = $query;
 
         return $req;
     }
@@ -124,7 +124,7 @@ final class ServerRequest extends Request implements ServerRequestInterface
         }
 
         $req = clone $this;
-        $req->uploadedFiles = [];
+        $req->uploadedFiles = $uploadedFiles;
 
         return $req;
     }
