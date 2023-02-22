@@ -56,8 +56,12 @@ class UploadedFile implements UploadedFileInterface
         $this->type = $type;
     }
 
-    public static function from_FILES(array $file): static
+    public static function from_FILES(array $file): ?static
     {
+        if ($file["error"] === UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+
         return new static(
             new Stream(new \SplFileObject($file["tmp_name"])),
             $file["size"],
