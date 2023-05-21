@@ -32,7 +32,7 @@ namespace TorresDeveloper\HTTPMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-final class Response implements ResponseInterface
+class Response implements ResponseInterface
 {
     use MessageTrait;
 
