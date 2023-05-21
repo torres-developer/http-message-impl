@@ -94,12 +94,13 @@ final class ServerRequest extends Request implements ServerRequestInterface
 
     public function getQueryParams(): array
     {
-        if (($queries = $this->queryParams) === null) {
+        if (!isset($this->queryParams)) {
             $queries = [];
             parse_str($this->resource->getQuery(), $queries);
+            $this->queryParams = $queries;
         }
 
-        return $queries;
+        return $this->queryParams;
     }
 
     public function withQueryParams(array $query): static
