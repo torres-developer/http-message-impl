@@ -87,7 +87,7 @@ trait MessageTrait
             throw new \InvalidArgumentException();
         }
 
-        return $this->headers[$name];
+        return $this->headers[$name] ?? [];
     }
 
     public function getHeaderLine($name): string
@@ -96,7 +96,7 @@ trait MessageTrait
             throw new \InvalidArgumentException();
         }
 
-        return "$name: " . implode($this->headers[$name]);
+        return "$name: " . implode(",", $this->headers[$name]);
     }
 
     public function withHeader($name, $value): static
